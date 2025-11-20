@@ -1,0 +1,7 @@
+{
+  "name": "Main workflow",
+  "description": "Main workflow to use for most repos adhering to the conventions used in this org",
+  "filePatterns": [
+    "mise.toml"
+  ]
+}
