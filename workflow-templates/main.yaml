@@ -9,8 +9,8 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4
       - run: mise run extract-ci-info
         id: ci-info
     outputs:
@@ -26,8 +26,8 @@ jobs:
       matrix:
         task: ${{ fromJSON(needs.setup.outputs.ci-tasks) }}
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4
       - run: mise run ${{ matrix.task }}
 
   build:
@@ -36,11 +36,11 @@ jobs:
       - setup
       - ci
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4
       - run: mise run build
       - name: Save artifacts for release
-        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: artifacts
           path: |
@@ -54,6 +54,6 @@ jobs:
       - build
     if: ${{ fromJSON(needs.setup.outputs.run-publish) }}
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4
       - run: mise run publish
